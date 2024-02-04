@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidad\Jugador\Cola.cs" />
+    <Compile Include="Entidad\Cola.cs" />
+    <Compile Include="Entidad\EntidadViva.cs" />
     <Compile Include="Entidad\Serpiente.cs" />
     <Compile Include="Entidad\TipoEntidad.cs" />
     <Compile Include="IColisionable.cs" />
@@ -92,22 +93,26 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Recursos\cabeza_abajo.jpeg" />
-    <EmbeddedResource Include="Recursos\cabeza_arriba.jpeg" />
-    <Resource Include="Recursos\cabeza_izquierda.jpeg" />
-    <Resource Include="Recursos\cabeza_muerto.jpeg" />
-    <Resource Include="Recursos\cabeza_muerto_arriba.jpeg" />
-    <Resource Include="Recursos\cabeza_muerto_derecha.jpeg" />
-    <Resource Include="Recursos\cabeza_muerto_izquierda.jpeg" />
-    <Resource Include="Recursos\casilla_1.jpg" />
-    <Resource Include="Recursos\casilla_2.jpeg" />
-    <Resource Include="Recursos\casilla_2.jpg" />
-    <Resource Include="Recursos\cuerpo.jpeg" />
-    <Resource Include="Recursos\cabeza_derecha.jpeg" />
-    <Resource Include="Recursos\cuerpo_muerto.jpg" />
-    <Resource Include="Entidad\manzana.jpg" />
+    <None Include="Recursos\cuerpo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\casilla_1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\cuerpo_muerto.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\cabeza_muerto.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\cabeza_muerto_arriba.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\cabeza_muerto_derecha.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\cabeza_muerto_izquierda.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

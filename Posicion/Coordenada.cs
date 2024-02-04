@@ -34,23 +34,6 @@ namespace SnakeGame.Posicion
             }
         }
 
-        public Coordenada DireccionOpuestaDe(Direccion direccion)
-        {
-            switch (direccion)
-            {
-                case Direccion.Abajo:
-                    return new Coordenada(X, Y - 1);
-                case Direccion.Arriba:
-                    return new Coordenada(X, Y + 1);
-                case Direccion.Derecha:
-                    return new Coordenada(X - 1, Y);
-                case Direccion.Izquierda:
-                    return new Coordenada(X + 1, Y);
-                default:
-                    return null;
-            }
-        }
-
         public object Clone()
         {
             return new Coordenada(X, Y);

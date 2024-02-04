@@ -27,9 +27,12 @@ namespace SnakeGame
         {
             if (this.serpiente != null && this.serpiente.Valida)
             {
-                // Movimiento de la serpiente
-                this.serpiente.Moverse();
-                this.ValidarColisiones();
+                if (this.serpiente.Vivo)
+                {
+                    // Movimiento de la serpiente
+                    this.serpiente.Moverse();
+                    this.ValidarColisiones();
+                }
             }
 
             if (AlHacerTick != null)
@@ -40,8 +43,12 @@ namespace SnakeGame
 
         private void ValidarColisiones()
         {
-            Casilla casillaActual = this.Mundo.ConsultarPosicion(this.serpiente.Posicion);
-            if (!casillaActual.PermiteColisiones || Mundo.ConsultarEntidadesEn(casillaActual).Any((entidad) => entidad.Colisionable))
+            Coordenada siguientePosicion = this.serpiente.Posicion.MoverHacia(this.serpiente.Direccion);
+
+            if (!this.Mundo.EstaDentroDelMapa(siguientePosicion.X, siguientePosicion.Y)) return;
+
+            Casilla siguienteCasilla = this.Mundo.ConsultarPosicion(siguientePosicion);
+            if (!siguienteCasilla.PermiteColisiones || Mundo.ConsultarEntidadesEn(siguienteCasilla).Any((entidad) => !entidad.Colisionable))
             {
                 // Matar la serpiente
                 this.MatarSerpiente();
@@ -50,7 +57,7 @@ namespace SnakeGame
 
         private void MatarSerpiente()
         {
-            throw new NotImplementedException();
+            this.serpiente.Morir();
         }
 
         public void ComenzarPartida()
@@ -85,7 +92,11 @@ namespace SnakeGame
                     break;
             }
 
-            this.serpiente.MirarHacia(direccion);
+            if (direccion != Direcciones.OpuestaDe(this.serpiente.Direccion) && direccion != this.serpiente.Direccion)
+            {
+                // Mover solo si se mueve hacia una dirección que no sea contraria o la misma que la actual
+                this.serpiente.MirarHacia(direccion);
+            }
         }
     }
 }

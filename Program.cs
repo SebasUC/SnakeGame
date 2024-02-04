@@ -21,7 +21,7 @@ namespace SnakeGame
         static async Task Main()
         {
 
-            TimeSpan tiempoPorTick = TimeSpan.FromMilliseconds(100); // 10 ticks por segundo
+            TimeSpan tiempoPorTick = TimeSpan.FromMilliseconds(120); // 10 ticks por segundo
 
             CancellationTokenSource origenToken = new CancellationTokenSource();
 

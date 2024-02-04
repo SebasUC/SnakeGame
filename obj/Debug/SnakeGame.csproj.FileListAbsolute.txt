@@ -38,3 +38,13 @@ F:\UTN\2024\IC\Programacion II\I Trabajo\SnakeGame\SnakeGame\obj\Debug\SnakeGame
 F:\UTN\2024\IC\Programacion II\I Trabajo\SnakeGame\SnakeGame\obj\Debug\SnakeGame.csproj.CoreCompileInputs.cache
 F:\UTN\2024\IC\Programacion II\I Trabajo\SnakeGame\SnakeGame\obj\Debug\SnakeGame.exe
 F:\UTN\2024\IC\Programacion II\I Trabajo\SnakeGame\SnakeGame\obj\Debug\SnakeGame.pdb
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.csproj.AssemblyReference.cache
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Frms.frmJuego.resources
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.csproj.GenerateResource.cache
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.exe
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.pdb
+F:\Programación\UTN\C#\SnakeGame\bin\Debug\SnakeGame.exe.config
+F:\Programación\UTN\C#\SnakeGame\bin\Debug\SnakeGame.exe
+F:\Programación\UTN\C#\SnakeGame\bin\Debug\SnakeGame.pdb
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Properties.Resources.resources
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.csproj.CoreCompileInputs.cache

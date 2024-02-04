@@ -67,6 +67,7 @@ namespace SnakeGame.Mapa
 
         public void EliminarEntidad(AbsEntidad entidad)
         {
+            this.Entidades.Remove(entidad);
             if (EventoEliminacionEntidad != null)
             {
                 EventoEliminacionEntidad(entidad, EventArgs.Empty);
@@ -84,6 +85,11 @@ namespace SnakeGame.Mapa
                 default:
                     throw new Exception($"No se encontró una entidad registrada para el tipo de entidad \"{tipoEntidad}\"");
             }
+        }
+
+        public bool EstaDentroDelMapa(int x, int y)
+        {
+            return x >= 0 && x < Casillas.GetLength(0) && y >= 0 && y < Casillas.GetLength(1);
         }
 
         public Casilla ConsultarPosicion(Coordenada coordenada)
@@ -126,7 +132,7 @@ namespace SnakeGame.Mapa
                     // Bordes
                     if (i == 0 || j == 0 || i == mapa.GetLength(0) - 1 || j == mapa.GetLength(1) - 1)
                     {
-                        mapa[i, j] = new Casilla(Colores.Borde, new Coordenada(i, j), false);
+                        mapa[i, j] = new Casilla(Colores.BordeUno, new Coordenada(i, j), false);
                     }
                     else
                     {

@@ -20,11 +20,5 @@ namespace SnakeGame.Entidad
         public bool NecesitaActualizar = true;
         public bool Valida = false; // Si es false la entidad desaparece
         public bool Colisionable = false;
-
-        public virtual void Moverse()
-        {
-            this.Posicion = this.Posicion.MoverHacia(Direccion);
-            NecesitaActualizar = true;
-        }
     }
 }
