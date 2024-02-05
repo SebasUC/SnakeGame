@@ -9,6 +9,7 @@ namespace SnakeGame.Entidad
     public enum TipoEntidad
     {
         Serpiente,
-        Cola
+        Cola,
+        Comida
     }
 }

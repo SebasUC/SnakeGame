@@ -5,11 +5,6 @@ using SnakeGame.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SnakeGame.Entidad
 {
@@ -43,18 +38,21 @@ namespace SnakeGame.Entidad
 
         public void Moverse()
         {
-            // Algoritmo que lentamente mueve cada parte hacia esa dirección
-            Coordenada ultimaPosicion = this.Posicion;
-            foreach (Cola cola in partes)
+            if (this.Vivo)
             {
-                Coordenada actual = cola.Posicion;
-                cola.MoverCola(ultimaPosicion);
-                ultimaPosicion = actual;
-            }
+                // Algoritmo que lentamente mueve cada parte hacia esa dirección
+                Coordenada ultimaPosicion = this.Posicion;
+                foreach (Cola cola in partes)
+                {
+                    Coordenada actual = cola.Posicion;
+                    cola.MoverCola(ultimaPosicion);
+                    ultimaPosicion = actual;
+                }
 
-            // Ahora se puede mover la cabeza
-            this.Posicion = this.Posicion.MoverHacia(Direccion);
-            NecesitaActualizar = true;
+                // Ahora se puede mover la cabeza
+                this.Posicion = this.Posicion.MoverHacia(Direccion);
+                NecesitaActualizar = true;
+            }
         }
 
         public void MirarHacia(Direccion direccion)
@@ -64,6 +62,8 @@ namespace SnakeGame.Entidad
             {
                 cola.Direccion = this.Direccion;
             }
+
+            ControladorSonido.Tocar(Sonido.Move, false);
         }
 
         public override void Morir()
@@ -73,6 +73,23 @@ namespace SnakeGame.Entidad
             {
                 cola.Morir();
             }
+
+            ControladorSonido.Tocar(Sonido.Pow, false);
+        }
+
+        public void ConsumirFruta(Fruta fruta)
+        {
+            this.Crecer();
+            ControladorSonido.Tocar(Sonido.Food, false);
+        }
+
+        public void Crecer()
+        {
+            Direccion contrariaALaUltimaCola = Direcciones.OpuestaDe(this.partes[this.partes.Count - 1].Direccion);
+            Coordenada detras = this.Posicion.MoverHacia(contrariaALaUltimaCola); // Detrás
+
+            Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, detras, this.Direccion);
+            this.partes.Add(cola);
         }
 
         private void PostGeneracion(AbsEntidad sender, EventArgs args)
@@ -86,7 +103,7 @@ namespace SnakeGame.Entidad
                 Direccion atras = Direcciones.OpuestaDe(this.Direccion);
 
                 // Generar cuerpo
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     // Mover a la direccion contraria para mostrar que está por "detrás"
                     nuevaPos = nuevaPos.MoverHacia(atras);

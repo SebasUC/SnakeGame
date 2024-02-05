@@ -18,18 +18,14 @@ namespace SnakeGame
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static async Task Main()
+        static void Main()
         {
 
-            TimeSpan tiempoPorTick = TimeSpan.FromMilliseconds(120); // 10 ticks por segundo
-
-            CancellationTokenSource origenToken = new CancellationTokenSource();
-
-            CancellationToken token = origenToken.Token;
+            TimeSpan tiempoPorTick = TimeSpan.FromMilliseconds(150);
 
             Thread hiloLogico = new Thread(() =>
             {
-                bool b = false;
+                bool b = true;
                 do
                 {
                     Juego.TickPrincipal();
@@ -39,7 +35,7 @@ namespace SnakeGame
                         Juego.ComenzarPartida();
                         b = true;
                     }
-                } while (!Juego.Terminado);
+                } while (!Juego.HaTerminado());
             });
             hiloLogico.Start();
 

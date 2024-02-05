@@ -15,8 +15,6 @@ namespace SnakeGame.Mapa
         public bool PermiteColisiones { get; set; }
         public Coordenada Posicion { get; set; }
 
-        private AbsEntidad entidadPresente;
-
         public Casilla(Color color, Coordenada pos, bool permiteColisiones = true)
         {
             this.Color = color;

@@ -67,6 +67,7 @@ namespace SnakeGame.Mapa
 
         public void EliminarEntidad(AbsEntidad entidad)
         {
+            entidad.Valida = false;
             this.Entidades.Remove(entidad);
             if (EventoEliminacionEntidad != null)
             {
@@ -82,6 +83,8 @@ namespace SnakeGame.Mapa
                     return new Serpiente(this);
                 case TipoEntidad.Cola:
                     return new Cola();
+                case TipoEntidad.Comida:
+                    return new Fruta();
                 default:
                     throw new Exception($"No se encontró una entidad registrada para el tipo de entidad \"{tipoEntidad}\"");
             }

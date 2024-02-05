@@ -33,8 +33,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.2.2.1\lib\net472\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Asio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Asio.2.2.1\lib\netstandard2.0\NAudio.Asio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Core.2.2.1\lib\netstandard2.0\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Midi, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Midi.2.2.1\lib\netstandard2.0\NAudio.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.Wasapi.2.2.1\lib\netstandard2.0\NAudio.Wasapi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinForms, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.WinForms.2.2.1\lib\net472\NAudio.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinMM, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.WinMM.2.2.1\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,12 +76,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControladorSonido.cs" />
     <Compile Include="Entidad\Cola.cs" />
     <Compile Include="Entidad\EntidadViva.cs" />
     <Compile Include="Entidad\Serpiente.cs" />
     <Compile Include="Entidad\TipoEntidad.cs" />
+    <Compile Include="Frms\ControladorMenu.cs" />
+    <Compile Include="Frms\frmTerminado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\frmTerminado.Designer.cs">
+      <DependentUpon>frmTerminado.cs</DependentUpon>
+    </Compile>
     <Compile Include="IColisionable.cs" />
-    <Compile Include="Imagenes.cs" />
     <Compile Include="Posicion\Coordenada.cs" />
     <Compile Include="Posicion\Direccion.cs" />
     <Compile Include="Entidad\AbsEntidad.cs" />
@@ -80,6 +117,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,6 +127,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Recursos\OXYGENE1.TTF" />
+    <None Include="Recursos\PUSAB___.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -113,6 +153,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Recursos\cabeza_muerto_izquierda.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\food.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\move.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\music.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\pow.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\unpause.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\desert-snake.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\food.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\move.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\music.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\pow.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\unpause.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\Food.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\trofeo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

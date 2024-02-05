@@ -9,3 +9,34 @@ C:\Users\Sebas\Documents\I Trabajo\SnakeGame\SnakeGame\obj\Release\SnakeGame.csp
 C:\Users\Sebas\Documents\I Trabajo\SnakeGame\SnakeGame\obj\Release\SnakeGame.csproj.CoreCompileInputs.cache
 C:\Users\Sebas\Documents\I Trabajo\SnakeGame\SnakeGame\obj\Release\SnakeGame.exe
 C:\Users\Sebas\Documents\I Trabajo\SnakeGame\SnakeGame\obj\Release\SnakeGame.pdb
+F:\Programación\UTN\C#\SnakeGame\bin\Release\SnakeGame.exe.config
+F:\Programación\UTN\C#\SnakeGame\bin\Release\SnakeGame.exe
+F:\Programación\UTN\C#\SnakeGame\bin\Release\SnakeGame.pdb
+F:\Programación\UTN\C#\SnakeGame\bin\Release\Microsoft.Win32.Registry.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Asio.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Core.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Midi.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Wasapi.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.WinForms.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.WinMM.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\System.Security.AccessControl.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\System.Security.Principal.Windows.dll
+F:\Programación\UTN\C#\SnakeGame\bin\Release\Microsoft.Win32.Registry.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Asio.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Core.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Midi.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.Wasapi.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.WinForms.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\NAudio.WinMM.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\System.Security.AccessControl.xml
+F:\Programación\UTN\C#\SnakeGame\bin\Release\System.Security.Principal.Windows.xml
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.csproj.AssemblyReference.cache
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.Frms.frmJuego.resources
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.Properties.Resources.resources
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.csproj.GenerateResource.cache
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.csproj.CoreCompileInputs.cache
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.csproj.CopyComplete
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.exe
+F:\Programación\UTN\C#\SnakeGame\obj\Release\SnakeGame.pdb

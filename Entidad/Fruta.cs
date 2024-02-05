@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnakeGame.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace SnakeGame.Entidad
 {
-    internal class Fruta : AbsEntidad, IRenderizable<Image>
+    public class Fruta : AbsEntidad, IRenderizable<Image>
     {
         public override string Nombre => "Fruta";
 
+        public Fruta() { 
+            Colisionable = true;
+        }
+
         public Image ObtenerImagen()
         {
-            throw new NotImplementedException();
+            return Resources.comida;
         }
     }
 }
