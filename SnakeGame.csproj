@@ -81,14 +81,31 @@
     <Compile Include="Entidad\EntidadViva.cs" />
     <Compile Include="Entidad\Serpiente.cs" />
     <Compile Include="Entidad\TipoEntidad.cs" />
-    <Compile Include="Frms\ControladorMenu.cs" />
+    <Compile Include="Frms\frmOpciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\frmOpciones.Designer.cs">
+      <DependentUpon>frmOpciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\frmPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\frmPerfil.Designer.cs">
+      <DependentUpon>frmPerfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frms\frmTerminado.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frms\frmTerminado.Designer.cs">
       <DependentUpon>frmTerminado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frms\MenuPuntero.cs" />
+    <Compile Include="Frms\Menu.cs" />
     <Compile Include="IColisionable.cs" />
+    <Compile Include="Mapa\Generador.cs" />
+    <Compile Include="Mapa\Generadores.cs" />
+    <Compile Include="Perfil.cs" />
+    <Compile Include="Personalizacion\Skins.cs" />
     <Compile Include="Posicion\Coordenada.cs" />
     <Compile Include="Posicion\Direccion.cs" />
     <Compile Include="Entidad\AbsEntidad.cs" />
@@ -99,13 +116,18 @@
     <Compile Include="IRenderizable.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="Mapa\Casilla.cs" />
-    <Compile Include="Mapa\Colores.cs" />
     <Compile Include="Mapa\Mundo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="Frms\frmJuego.resx">
       <DependentUpon>frmJuego.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\frmOpciones.resx">
+      <DependentUpon>frmOpciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\frmPerfil.resx">
+      <DependentUpon>frmPerfil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,47 +149,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Recursos\OXYGENE1.TTF" />
-    <None Include="Recursos\PUSAB___.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\cuerpo.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\casilla_1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\cuerpo_muerto.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\cabeza_muerto.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\cabeza_muerto_arriba.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\cabeza_muerto_derecha.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\cabeza_muerto_izquierda.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\food.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\move.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\music.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\pow.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Recursos\unpause.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Recursos\desert-snake.wav" />
@@ -192,6 +176,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Recursos\trofeo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Recursos\mapa_nevado.png" />
+    <Content Include="Recursos\mapa_desertico.png" />
+    <Content Include="Recursos\mapa_clasico.png" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_amarillo_cabeza_abajo.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_arriba.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_derecha.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_izquierda.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_muerto.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_muerto_arriba.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_muerto_derecha.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cabeza_muerto_izquierda.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cuerpo.jpeg" />
+    <Content Include="Recursos\Snake\Amarillo\amarillo_cuerpo_muerto.jpg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_abajo.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_arriba.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_derecha.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_izquierda.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_muerto.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_muerto_arriba.jpg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_muerto_derecha.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cabeza_muerto_izquierda.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cuerpo.jpeg" />
+    <Content Include="Recursos\Snake\Azul\azul_cuerpo_muerto.jpg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_abajo.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_arriba.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_derecha.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_izquierda.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_muerto.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_muerto_arriba.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_muerto_derecha.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cabeza_muerto_izquierda.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cuerpo.jpeg" />
+    <Content Include="Recursos\Snake\Verde\verde_cuerpo_muerto.jpg" />
+    <Content Include="Recursos\snake_fondo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,6 @@
 ﻿using SnakeGame.Frms;
+using SnakeGame.Mapa;
+using SnakeGame.Personalizacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,32 +13,34 @@ namespace SnakeGame
     internal static class Program
     {
 
-        public static Juego Juego { get; } = new Juego();
+        public static Juego Juego { get; private set; }
 
 
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
-        static void Main()
+        internal static void Main()
         {
+            Juego = new Juego()
+            {
+                SkinSeleccionada = Skins.SkinAzul,
+                Mundo = new Mundo()
+                {
+                    Generador = Generadores.GenClasico
+                }
+            };
 
-            TimeSpan tiempoPorTick = TimeSpan.FromMilliseconds(150);
+            TimeSpan tiempoPorTick = TimeSpan.FromMilliseconds(100);
 
             Thread hiloLogico = new Thread(() =>
             {
-                bool b = true;
                 do
                 {
                     Juego.TickPrincipal();
                     Thread.Sleep(tiempoPorTick); // Esperar antes del siguiente tick
-                    if (!b)
-                    {
-                        Juego.ComenzarPartida();
-                        b = true;
-                    }
                 } while (!Juego.HaTerminado());
             });
+            hiloLogico.Priority = ThreadPriority.Highest;
             hiloLogico.Start();
 
             Application.EnableVisualStyles();

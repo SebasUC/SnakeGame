@@ -63,9 +63,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_abajo {
+        internal static System.Drawing.Bitmap amarillo_amarillo_cabeza_abajo {
             get {
-                object obj = ResourceManager.GetObject("cabeza_abajo", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_amarillo_cabeza_abajo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_arriba {
+        internal static System.Drawing.Bitmap amarillo_cabeza_arriba {
             get {
-                object obj = ResourceManager.GetObject("cabeza_arriba", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_arriba", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_derecha {
+        internal static System.Drawing.Bitmap amarillo_cabeza_derecha {
             get {
-                object obj = ResourceManager.GetObject("cabeza_derecha", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_derecha", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_izquierda {
+        internal static System.Drawing.Bitmap amarillo_cabeza_izquierda {
             get {
-                object obj = ResourceManager.GetObject("cabeza_izquierda", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_izquierda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_muerto {
+        internal static System.Drawing.Bitmap amarillo_cabeza_muerto {
             get {
-                object obj = ResourceManager.GetObject("cabeza_muerto", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_muerto", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_muerto_arriba {
+        internal static System.Drawing.Bitmap amarillo_cabeza_muerto_arriba {
             get {
-                object obj = ResourceManager.GetObject("cabeza_muerto_arriba", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_muerto_arriba", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_muerto_derecha {
+        internal static System.Drawing.Bitmap amarillo_cabeza_muerto_derecha {
             get {
-                object obj = ResourceManager.GetObject("cabeza_muerto_derecha", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_muerto_derecha", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,129 @@ namespace SnakeGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cabeza_muerto_izquierda {
+        internal static System.Drawing.Bitmap amarillo_cabeza_muerto_izquierda {
             get {
-                object obj = ResourceManager.GetObject("cabeza_muerto_izquierda", resourceCulture);
+                object obj = ResourceManager.GetObject("amarillo_cabeza_muerto_izquierda", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap amarillo_cuerpo {
+            get {
+                object obj = ResourceManager.GetObject("amarillo_cuerpo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap amarillo_cuerpo_muerto {
+            get {
+                object obj = ResourceManager.GetObject("amarillo_cuerpo_muerto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_abajo {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_abajo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_arriba {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_derecha {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_derecha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_izquierda {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_izquierda", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_muerto {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_muerto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_muerto_arriba {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_muerto_arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_muerto_derecha {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_muerto_derecha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cabeza_muerto_izquierda {
+            get {
+                object obj = ResourceManager.GetObject("azul_cabeza_muerto_izquierda", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cuerpo {
+            get {
+                object obj = ResourceManager.GetObject("azul_cuerpo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap azul_cuerpo_muerto {
+            get {
+                object obj = ResourceManager.GetObject("azul_cuerpo_muerto", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,26 +266,6 @@ namespace SnakeGame.Properties {
         internal static System.Drawing.Bitmap comida {
             get {
                 object obj = ResourceManager.GetObject("comida", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cuerpo {
-            get {
-                object obj = ResourceManager.GetObject("cuerpo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cuerpo_muerto {
-            get {
-                object obj = ResourceManager.GetObject("cuerpo_muerto", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -221,6 +321,106 @@ namespace SnakeGame.Properties {
         internal static System.IO.UnmanagedMemoryStream unpause {
             get {
                 return ResourceManager.GetStream("unpause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_abajo {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_abajo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_arriba {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_derecha {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_derecha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_izquierda {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_izquierda", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_muerto {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_muerto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_muerto_arriba {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_muerto_arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_muerto_derecha {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_muerto_derecha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cabeza_muerto_izquierda {
+            get {
+                object obj = ResourceManager.GetObject("verde_cabeza_muerto_izquierda", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cuerpo {
+            get {
+                object obj = ResourceManager.GetObject("verde_cuerpo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde_cuerpo_muerto {
+            get {
+                object obj = ResourceManager.GetObject("verde_cuerpo_muerto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

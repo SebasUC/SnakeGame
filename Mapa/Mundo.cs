@@ -21,6 +21,18 @@ namespace SnakeGame.Mapa
         public event AparicionEntidadHandler EventoAparicionEntidad;
         public event EliminacionEntidadHandler EventoEliminacionEntidad;
 
+        private Generador _generador;
+        public Generador Generador { 
+            get
+            {
+                return _generador;
+            }
+            set
+            {
+                _generador = value;
+                ActualizarColores();
+            }
+        }
         public int TamañoX { get; set; }
         public int TamañoY { get; set; }
 
@@ -92,7 +104,17 @@ namespace SnakeGame.Mapa
 
         public bool EstaDentroDelMapa(int x, int y)
         {
-            return x >= 0 && x < Casillas.GetLength(0) && y >= 0 && y < Casillas.GetLength(1);
+            return XDentroDelMapa(x) && YDentroDelMapa(y);
+        }
+
+        public bool XDentroDelMapa(int x)
+        {
+            return x >= 0 && x < Casillas.GetLength(0);
+        }
+
+        public bool YDentroDelMapa(int y)
+        {
+            return y >= 0 && y < Casillas.GetLength(1);
         }
 
         public Casilla ConsultarPosicion(Coordenada coordenada)
@@ -123,10 +145,33 @@ namespace SnakeGame.Mapa
             });
         }
 
+        private void ActualizarColores()
+        {
+            bool bandera = false;
+
+            for (int i = 0; i < Casillas.GetLength(0); i++)
+            {
+                for (int j = 0; j < Casillas.GetLength(1); j++)
+                {
+                    // Bordes
+                    if (i == 0 || j == 0 || i == Casillas.GetLength(0) - 1 || j == Casillas.GetLength(1) - 1)
+                    {
+                        Casillas[i, j].Color = Generador.BordeUno;
+                    }
+                    else
+                    {
+                        // Casillas "normales"
+                        Casillas[i, j].Color = (bandera ? Generador.CasillaUno : Generador.CasillaDos);
+                    }
+                    bandera = !bandera;
+                }
+                bandera = !bandera;
+            }
+        }
+
         private static Casilla[,] GenerarMapa(int x, int y)
         {
             Casilla[,] mapa = new Casilla[x, y];
-            bool bandera = false;
 
             for (int i = 0; i < mapa.GetLength(0); i++)
             {
@@ -135,16 +180,14 @@ namespace SnakeGame.Mapa
                     // Bordes
                     if (i == 0 || j == 0 || i == mapa.GetLength(0) - 1 || j == mapa.GetLength(1) - 1)
                     {
-                        mapa[i, j] = new Casilla(Colores.BordeUno, new Coordenada(i, j), false);
+                        mapa[i, j] = new Casilla(Color.Black, new Coordenada(i, j), false);
                     }
                     else
                     {
                         // Casillas "normales"
-                        mapa[i, j] = new Casilla(bandera ? Colores.CasillaUno : Colores.CasillaDos, new Posicion.Coordenada(i, j));
+                        mapa[i, j] = new Casilla(Color.Black, new Posicion.Coordenada(i, j));
                     }
-                    bandera = !bandera;
                 }
-                bandera = !bandera;
             }
 
             return mapa;

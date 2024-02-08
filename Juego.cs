@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SnakeGame.Entidad;
 using SnakeGame.Mapa;
+using SnakeGame.Personalizacion;
 using SnakeGame.Posicion;
 
 namespace SnakeGame
@@ -22,7 +23,9 @@ namespace SnakeGame
         public event EventoPuntuacionHandler AlPuntuar;
 
         public Estado EstadoActual;
-        public Mundo Mundo = new Mundo();
+        public Skins.Skin SkinSeleccionada { get; set; }
+        public Mundo Mundo;
+        public bool LimitesActivos { get; set; } = true;
 
         public int TickActual { get; set; }
         public Serpiente Jugador { get; set; }
@@ -52,7 +55,6 @@ namespace SnakeGame
                         this.Jugador.MirarHacia((Direccion)this.proximaDireccion);
                         this.proximaDireccion = null;
                     }
-                    this.ValidarColisiones();
                     this.Jugador.Moverse();
                     this.ValidarComida();
 
@@ -71,22 +73,10 @@ namespace SnakeGame
             }
         }
 
-        private void ValidarColisiones()
-        {
-            Coordenada siguientePosicion = this.Jugador.Posicion.MoverHacia(this.Jugador.Direccion);
-
-            if (!this.Mundo.EstaDentroDelMapa(siguientePosicion.X, siguientePosicion.Y)) return;
-
-            Casilla siguienteCasilla = this.Mundo.ConsultarPosicion(siguientePosicion);
-            if (!siguienteCasilla.PermiteColisiones || Mundo.ConsultarEntidadesEn(siguienteCasilla).Any((entidad) => !entidad.Colisionable))
-            {
-                // Matar la serpiente
-                this.MatarSerpiente();
-            }
-        }
-
         private void ValidarComida()
         {
+            if (!this.Mundo.EstaDentroDelMapa(this.Jugador.Posicion.X, this.Jugador.Posicion.Y)) return;
+
             Casilla casilla = this.Mundo.ConsultarPosicion(this.Jugador.Posicion);
 
             // Filtrar las entidades para obtener solo las de tipo Fruta
@@ -107,11 +97,6 @@ namespace SnakeGame
                     AlPuntuar();
                 }
             }
-        }
-
-        private void MatarSerpiente()
-        {
-            this.Jugador.Morir();
         }
 
         private void AparecerFruta()
@@ -144,7 +129,7 @@ namespace SnakeGame
         {
             Console.WriteLine("Comenzando partida...");
 
-            this.Jugador = (Serpiente) Mundo.GenerarEntidad(TipoEntidad.Serpiente, new Coordenada(5, 9), Direccion.Derecha);
+            this.Jugador = (Serpiente)Mundo.GenerarEntidad(TipoEntidad.Serpiente, new Coordenada(5, 9), Direccion.Derecha, (j) => { ((Serpiente)j).Skin = SkinSeleccionada; });
             this.AparecerFruta();
 
             this.EstadoActual = Estado.Iniciado;

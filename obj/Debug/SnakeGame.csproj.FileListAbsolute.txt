@@ -69,3 +69,5 @@ F:\Programación\UTN\C#\SnakeGame\bin\Debug\NAudio.WinMM.xml
 F:\Programación\UTN\C#\SnakeGame\bin\Debug\System.Security.AccessControl.xml
 F:\Programación\UTN\C#\SnakeGame\bin\Debug\System.Security.Principal.Windows.xml
 F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.csproj.CopyComplete
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Frms.frmPerfil.resources
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Frms.frmOpciones.resources

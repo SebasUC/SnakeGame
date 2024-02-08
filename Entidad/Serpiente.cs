@@ -1,33 +1,20 @@
 ﻿using SnakeGame.Entidad.Jugador;
 using SnakeGame.Mapa;
+using SnakeGame.Personalizacion;
 using SnakeGame.Posicion;
 using SnakeGame.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using static SnakeGame.Personalizacion.Skins;
 
 namespace SnakeGame.Entidad
 {
     public class Serpiente : EntidadViva, IRenderizable<Image>
     {
-        private static readonly Dictionary<Direccion, Image> texturas = new Dictionary<Direccion, Image>()
-        {
-            { Direccion.Arriba, Resources.cabeza_arriba },
-            { Direccion.Abajo, Resources.cabeza_abajo },
-            { Direccion.Izquierda, Resources.cabeza_izquierda },
-            { Direccion.Derecha, Resources.cabeza_derecha }
-        };
-
-        private static readonly Dictionary<Direccion, Image> texturasMuerto = new Dictionary<Direccion, Image>()
-        {
-            { Direccion.Arriba, Resources.cabeza_muerto_arriba },
-            { Direccion.Abajo, Resources.cabeza_muerto },
-            { Direccion.Izquierda, Resources.cabeza_muerto_izquierda },
-            { Direccion.Derecha, Resources.cabeza_muerto_derecha }
-        };
-
         public override string Nombre => "Serpiente";
-        
+        public Skin Skin { get; set; }
         private List<Cola> partes = new List<Cola>();
 
         public Serpiente(Mundo mundo)
@@ -50,9 +37,63 @@ namespace SnakeGame.Entidad
                 }
 
                 // Ahora se puede mover la cabeza
-                this.Posicion = this.Posicion.MoverHacia(Direccion);
-                NecesitaActualizar = true;
+                if (this.ValidarColisiones())
+                {
+                    Coordenada siguiente = this.Posicion.MoverHacia(Direccion);
+
+                    if (!Program.Juego.LimitesActivos) {
+                        // Si se permite salirse del mapa y la siguiente casilla se saldrá
+
+                        if (siguiente.Y >= (Mundo.TamañoY - 1))
+                        {
+                            // Si se sale por debajo del mapa, aparecer por arriba del mapa
+                            siguiente.Y = 1;
+                        }
+
+                        if (siguiente.Y <= 0)
+                        {
+                            // Si se sale por arriba del mapa, aparecer por debajo del mapa
+                            siguiente.Y = Mundo.TamañoY - 2;
+                        }
+
+                        if (siguiente.X >= (Mundo.TamañoX - 1))
+                        {
+                            // Si se sale por la derecha del mapa, aparecer por la izquierda del mapa
+                            siguiente.X = 1;
+                        }
+
+                        if (siguiente.X <= 0)
+                        {
+                            // Si se sale por la izquierda del mapa, aparecer por la derecha del mapa
+                            siguiente.X = Mundo.TamañoX - 2;
+                        }
+
+
+                    }
+                    this.Posicion = siguiente;
+
+                    NecesitaActualizar = true;
+                }
             }
+        }
+
+        public bool ValidarColisiones()
+        {
+            Coordenada siguientePosicion = this.Posicion.MoverHacia(this.Direccion);
+
+            if (this.Mundo.EstaDentroDelMapa(siguientePosicion.X, siguientePosicion.Y)) {
+                Casilla siguienteCasilla = this.Mundo.ConsultarPosicion(siguientePosicion);
+
+                // Si los limites están activos y la casilla no permite colisiones o hay una entidad colisionable morirá
+                if ((!siguienteCasilla.PermiteColisiones && Program.Juego.LimitesActivos) || Mundo.ConsultarEntidadesEn(siguienteCasilla).Any((entidad) => !entidad.Colisionable))
+                {
+                    // Matar la serpiente
+                    this.Morir();
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void MirarHacia(Direccion direccion)
@@ -88,7 +129,7 @@ namespace SnakeGame.Entidad
             Direccion contrariaALaUltimaCola = Direcciones.OpuestaDe(this.partes[this.partes.Count - 1].Direccion);
             Coordenada detras = this.Posicion.MoverHacia(contrariaALaUltimaCola); // Detrás
 
-            Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, detras, this.Direccion);
+            Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, detras, this.Direccion, (j) => { ((Cola)j).Skin = this.Skin; });
             this.partes.Add(cola);
         }
 
@@ -109,7 +150,7 @@ namespace SnakeGame.Entidad
                     nuevaPos = nuevaPos.MoverHacia(atras);
 
                     // Generar la cola de la serpiente
-                    Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, nuevaPos, this.Direccion);
+                    Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, nuevaPos, this.Direccion, (j) => { ((Cola)j).Skin = this.Skin; });
 
                     this.partes.Add(cola);
                 }
@@ -118,7 +159,7 @@ namespace SnakeGame.Entidad
 
         public Image ObtenerImagen()
         {
-            return Vivo ? texturas[this.Direccion] : texturasMuerto[this.Direccion];
+            return Vivo ? Skin.TexturasCabeza[this.Direccion] : Skin.TexturasCabezaMuerta[this.Direccion];
         }
     }
 }

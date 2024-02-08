@@ -7,26 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SnakeGame.Frms
 {
     public class frmJuego : Form
     {
-        private Label lblJugar;
         private Label lblTitulo;
-        private Label lblPerfil;
-        private Label lblAjustes;
-        private Label lblCabeza;
         private Panel pnlPantalla;
 
-        private List<Label> opciones;
+        private ControladorFrmJuego controlador;
+        private Menu menu;
+
         private Label lblPuntuacion;
         private Label lblTrofeo;
-        private int opcionActual;
+        private Label lblJugar;
+        private Label lblAjustes;
+        private Label lblPerfil;
+        private Label lblSalir;
+        private Label lblCabeza;
 
         public frmJuego()
         {
-            new Controlador(this);
             this.InitializeComponent();
 
             // Suscribirse al evento de cerrar
@@ -35,6 +37,7 @@ namespace SnakeGame.Frms
                 Program.Juego.TerminarPartida();
             };
 
+            // Suscribirse al evento de puntuar
             Program.Juego.AlPuntuar += () =>
             {
                 EjecutarEnHiloPrincipal(() =>
@@ -43,8 +46,17 @@ namespace SnakeGame.Frms
                 });
             };
 
+            // Construir controladores lógicos
+            this.controlador = new ControladorFrmJuego(this);
+            this.menu = new MenuPuntero()
+            {
+                Puntero = this.lblCabeza,
+                Controles = new List<Control>() { lblJugar, lblPerfil, lblAjustes, lblSalir },
+            };
+            this.menu.Actualizar();
+            this.menu.AlHacerClick += SeleccionarOpcion;
 
-            opciones = new List<Label>() { lblJugar, lblPerfil, lblAjustes };
+            //Cursor.Hide();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -52,25 +64,7 @@ namespace SnakeGame.Frms
             if (Program.Juego.EstadoActual == Estado.Esperando)
             {
                 // Menú principal
-                if (opcionActual < 2 && (keyData == Keys.S || keyData == Keys.Down))
-                {
-                    // Puede ir hacia abajo
-                    opcionActual++;
-                    ActualizarPosicionCabeza();
-                }
-
-                if (opcionActual > 0 && (keyData == Keys.W || keyData == Keys.Up))
-                {
-                    // Puede ir hacia arriba
-                    opcionActual--;
-                    ActualizarPosicionCabeza();
-                }
-
-                if (keyData == Keys.Enter)
-                {
-                    // Seleccionar opción
-                    SeleccionarOpcion();
-                }
+                this.menu.EscucharAlTecleado(keyData);
             } else
             {
                 Program.Juego.AlPresionarTecla(keyData);
@@ -78,35 +72,38 @@ namespace SnakeGame.Frms
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void SeleccionarOpcion()
+        private void SeleccionarOpcion(Control control, int opcionSeleccionada)
         {
-            if (this.opcionActual == 0)
+            if (control == lblJugar)
             {
                 // Jugar
-                this.OcultarMenuPrincipal();
+                this.menu.OcultarOpciones();
                 this.pnlPantalla.Visible = true;
-                this.pnlPantalla.Location = this.opciones[0].Location;
+                this.pnlPantalla.Location = lblJugar.Location;
 
                 this.lblPuntuacion.Text = "0";
                 this.lblPuntuacion.Visible = true;
                 this.lblTrofeo.Visible = true;
 
+//                this.BackColor = Program.Juego.Mundo.Generador.BordeDos;
+
                 Program.Juego.EstadoActual = Estado.Preparado;
+            } else if (control == lblPerfil)
+            {
+                frmPerfil frm = new frmPerfil();
+                frm.ShowDialog(this);
+
+                // Si cambiaron el ícono, actualizarlo
+                this.menu.OpcionSeleccionada = opcionSeleccionada;
+                this.menu.Actualizar();
+            } else if (control == lblAjustes)
+            {
+                frmOpciones frm = new frmOpciones();
+                frm.ShowDialog(this);
+            } else if (control == lblSalir)
+            {
+                this.Close();
             }
-
-            ControladorSonido.Tocar(Sonido.Pow, false);
-        }
-
-        private void OcultarMenuPrincipal()
-        {
-            this.lblCabeza.Visible = false;
-            this.opciones.ForEach(opcion => { opcion.Visible = false; });
-        }
-
-        private void ActualizarPosicionCabeza()
-        {
-            this.lblCabeza.Location = new Point(lblCabeza.Location.X, this.opciones[opcionActual].Location.Y);
-            ControladorSonido.Tocar(Sonido.Move, false);
         }
 
         internal void AgregarBox(PictureBox pictureBox)
@@ -140,13 +137,14 @@ namespace SnakeGame.Frms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJuego));
             this.pnlPantalla = new System.Windows.Forms.Panel();
-            this.lblJugar = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblPerfil = new System.Windows.Forms.Label();
-            this.lblAjustes = new System.Windows.Forms.Label();
-            this.lblCabeza = new System.Windows.Forms.Label();
             this.lblPuntuacion = new System.Windows.Forms.Label();
             this.lblTrofeo = new System.Windows.Forms.Label();
+            this.lblJugar = new System.Windows.Forms.Label();
+            this.lblAjustes = new System.Windows.Forms.Label();
+            this.lblPerfil = new System.Windows.Forms.Label();
+            this.lblCabeza = new System.Windows.Forms.Label();
+            this.lblSalir = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // pnlPantalla
@@ -157,18 +155,6 @@ namespace SnakeGame.Frms
             this.pnlPantalla.TabIndex = 0;
             this.pnlPantalla.Paint += new System.Windows.Forms.PaintEventHandler(this.pintarMapa);
             // 
-            // lblJugar
-            // 
-            this.lblJugar.BackColor = System.Drawing.Color.Black;
-            this.lblJugar.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJugar.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblJugar.Location = new System.Drawing.Point(196, 140);
-            this.lblJugar.Name = "lblJugar";
-            this.lblJugar.Size = new System.Drawing.Size(500, 50);
-            this.lblJugar.TabIndex = 4;
-            this.lblJugar.Text = "Jugar";
-            this.lblJugar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblTitulo
             // 
             this.lblTitulo.BackColor = System.Drawing.Color.Black;
@@ -178,45 +164,8 @@ namespace SnakeGame.Frms
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(500, 78);
             this.lblTitulo.TabIndex = 5;
-            this.lblTitulo.Text = "Snake";
+            this.lblTitulo.Text = "Snake  ";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblPerfil
-            // 
-            this.lblPerfil.BackColor = System.Drawing.Color.Black;
-            this.lblPerfil.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPerfil.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblPerfil.Location = new System.Drawing.Point(196, 195);
-            this.lblPerfil.Name = "lblPerfil";
-            this.lblPerfil.Size = new System.Drawing.Size(500, 50);
-            this.lblPerfil.TabIndex = 6;
-            this.lblPerfil.Text = "Perfil";
-            this.lblPerfil.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAjustes
-            // 
-            this.lblAjustes.BackColor = System.Drawing.Color.Black;
-            this.lblAjustes.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAjustes.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAjustes.Location = new System.Drawing.Point(196, 250);
-            this.lblAjustes.Name = "lblAjustes";
-            this.lblAjustes.Size = new System.Drawing.Size(500, 50);
-            this.lblAjustes.TabIndex = 7;
-            this.lblAjustes.Text = "Ajustes";
-            this.lblAjustes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCabeza
-            // 
-            this.lblCabeza.BackColor = System.Drawing.Color.Black;
-            this.lblCabeza.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCabeza.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCabeza.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblCabeza.Image = ((System.Drawing.Image)(resources.GetObject("lblCabeza.Image")));
-            this.lblCabeza.Location = new System.Drawing.Point(294, 140);
-            this.lblCabeza.Name = "lblCabeza";
-            this.lblCabeza.Size = new System.Drawing.Size(50, 50);
-            this.lblCabeza.TabIndex = 8;
-            this.lblCabeza.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblPuntuacion
             // 
@@ -224,7 +173,7 @@ namespace SnakeGame.Frms
             this.lblPuntuacion.Font = new System.Drawing.Font("Pusab", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPuntuacion.ForeColor = System.Drawing.SystemColors.Control;
             this.lblPuntuacion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblPuntuacion.Location = new System.Drawing.Point(91, 140);
+            this.lblPuntuacion.Location = new System.Drawing.Point(231, 638);
             this.lblPuntuacion.Name = "lblPuntuacion";
             this.lblPuntuacion.Size = new System.Drawing.Size(99, 50);
             this.lblPuntuacion.TabIndex = 9;
@@ -239,25 +188,88 @@ namespace SnakeGame.Frms
             this.lblTrofeo.ForeColor = System.Drawing.SystemColors.Control;
             this.lblTrofeo.Image = ((System.Drawing.Image)(resources.GetObject("lblTrofeo.Image")));
             this.lblTrofeo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTrofeo.Location = new System.Drawing.Point(12, 140);
+            this.lblTrofeo.Location = new System.Drawing.Point(152, 638);
             this.lblTrofeo.Name = "lblTrofeo";
             this.lblTrofeo.Size = new System.Drawing.Size(73, 50);
             this.lblTrofeo.TabIndex = 10;
             this.lblTrofeo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTrofeo.Visible = false;
             // 
+            // lblJugar
+            // 
+            this.lblJugar.BackColor = System.Drawing.Color.Black;
+            this.lblJugar.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJugar.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblJugar.Location = new System.Drawing.Point(180, 120);
+            this.lblJugar.Name = "lblJugar";
+            this.lblJugar.Size = new System.Drawing.Size(500, 50);
+            this.lblJugar.TabIndex = 4;
+            this.lblJugar.Text = "Jugar";
+            this.lblJugar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAjustes
+            // 
+            this.lblAjustes.BackColor = System.Drawing.Color.Black;
+            this.lblAjustes.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAjustes.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblAjustes.Location = new System.Drawing.Point(180, 280);
+            this.lblAjustes.Name = "lblAjustes";
+            this.lblAjustes.Size = new System.Drawing.Size(500, 50);
+            this.lblAjustes.TabIndex = 7;
+            this.lblAjustes.Text = "Ajustes";
+            this.lblAjustes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPerfil
+            // 
+            this.lblPerfil.BackColor = System.Drawing.Color.Black;
+            this.lblPerfil.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPerfil.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblPerfil.Location = new System.Drawing.Point(180, 200);
+            this.lblPerfil.Name = "lblPerfil";
+            this.lblPerfil.Size = new System.Drawing.Size(500, 50);
+            this.lblPerfil.TabIndex = 6;
+            this.lblPerfil.Text = "Perfil";
+            this.lblPerfil.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCabeza
+            // 
+            this.lblCabeza.BackColor = System.Drawing.Color.Black;
+            this.lblCabeza.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCabeza.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCabeza.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCabeza.Image = ((System.Drawing.Image)(resources.GetObject("lblCabeza.Image")));
+            this.lblCabeza.Location = new System.Drawing.Point(280, 120);
+            this.lblCabeza.Name = "lblCabeza";
+            this.lblCabeza.Size = new System.Drawing.Size(50, 50);
+            this.lblCabeza.TabIndex = 8;
+            this.lblCabeza.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSalir
+            // 
+            this.lblSalir.BackColor = System.Drawing.Color.Black;
+            this.lblSalir.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSalir.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblSalir.Location = new System.Drawing.Point(180, 372);
+            this.lblSalir.Name = "lblSalir";
+            this.lblSalir.Size = new System.Drawing.Size(500, 50);
+            this.lblSalir.TabIndex = 11;
+            this.lblSalir.Text = "Salir";
+            this.lblSalir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmJuego
             // 
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(876, 738);
+            this.ClientSize = new System.Drawing.Size(884, 738);
+            this.ControlBox = false;
             this.Controls.Add(this.lblTrofeo);
             this.Controls.Add(this.lblPuntuacion);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblCabeza);
             this.Controls.Add(this.lblAjustes);
             this.Controls.Add(this.lblPerfil);
-            this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.lblJugar);
             this.Controls.Add(this.pnlPantalla);
+            this.Controls.Add(this.lblJugar);
+            this.Controls.Add(this.lblSalir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmJuego";
@@ -287,12 +299,12 @@ namespace SnakeGame.Frms
         }
     }
 
-    internal class Controlador
+    internal class ControladorFrmJuego
     {
         private frmJuego frm;
         private Dictionary<int, PictureBox> componentes;
 
-        public Controlador(frmJuego frm)
+        public ControladorFrmJuego(frmJuego frm)
         {
             this.frm = frm;
             this.componentes = new Dictionary<int, PictureBox>();

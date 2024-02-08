@@ -13,28 +13,42 @@ namespace SnakeGame
     public static class ControladorSonido
     {
 
-        public static async void Tocar(Sonido sonido, bool loop)
+        public static void Tocar(Sonido sonido, bool loop)
         {
-            await Task.Run(() =>
+            //await Task.Run(() =>
+            //{
+            WaveStream importer = new RawSourceWaveStream(ObtenerArchivo(sonido), new WaveFormat());
+            BlockAlignReductionStream stream = new BlockAlignReductionStream(importer);
+
+            DirectSoundOut output = new DirectSoundOut();
+            output.Init(stream);
+            output.Play();
+            output.PlaybackStopped += (s, a) =>
             {
-                RawSourceWaveStream importer = new RawSourceWaveStream(ObtenerArchivo(sonido), new WaveFormat());
-                WaveOutEvent soundFx = new WaveOutEvent();
-
-                soundFx.Init(importer);
-                soundFx.Play();
-                soundFx.PlaybackStopped += (sender, args) =>
-                {
-                    // Liberar recursos
-                    soundFx.Dispose();
-                    importer.Dispose();
-
-                    if (loop)
-                    {
-                        Tocar(sonido, true);
-                    }
-                };
-            });
+                output.Dispose();
+                stream.Dispose();
+                importer.Dispose();
+                if (loop) Tocar(sonido, true);
+            };
         }
+
+
+        //WaveOutEvent soundFx = new WaveOutEvent();
+
+        //soundFx.Init(importer);
+        //soundFx.Play();
+        //soundFx.PlaybackStopped += (sender, args) =>
+        //{
+        //    // Liberar recursos
+        //    soundFx.Dispose();
+        //    importer.Dispose();
+
+        //    if (loop)
+        //    {
+        //        Tocar(sonido, true);
+        //    }
+        //};
+        //});
 
         private static System.IO.Stream ObtenerArchivo(Sonido sonido)
         {
