@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -14,7 +15,7 @@ namespace SnakeGame.Frms
     public class frmJuego : Form
     {
         private Label lblTitulo;
-        private Panel pnlPantalla;
+        internal Panel pnlPantalla;
 
         private ControladorFrmJuego controlador;
         private Menu menu;
@@ -31,19 +32,19 @@ namespace SnakeGame.Frms
         {
             this.InitializeComponent();
 
-            // Suscribirse al evento de cerrar
-            this.FormClosed += (sender, e) =>
-            {
-                Program.Juego.TerminarPartida();
-            };
-
             // Suscribirse al evento de puntuar
             Program.Juego.AlPuntuar += () =>
             {
                 EjecutarEnHiloPrincipal(() =>
                 {
-                    this.lblPuntuacion.Text = $"{Program.Juego.Puntuacion}";
+                    this.lblPuntuacion.Text = $"{Program.Juego.Puntuacion}   {Perfil.Instance.Nombre}";
                 });
+            };
+
+            // Suscribirse al evento de comenzar partida
+            Program.Juego.AlComenzar += () =>
+            {
+                this.BackColor = Program.Juego.Mundo.Generador.BordeDos;
             };
 
             // Construir controladores lógicos
@@ -56,7 +57,7 @@ namespace SnakeGame.Frms
             this.menu.Actualizar();
             this.menu.AlHacerClick += SeleccionarOpcion;
 
-            //Cursor.Hide();
+            Cursor.Hide();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -67,7 +68,25 @@ namespace SnakeGame.Frms
                 this.menu.EscucharAlTecleado(keyData);
             } else
             {
-                Program.Juego.AlPresionarTecla(keyData);
+                if ((keyData == Keys.Escape || keyData == Keys.Enter) && Program.Juego.Jugador.Vivo)
+                {
+                    // Si el jugador sigue vivo, se pude pausar la partida
+                    if (Program.Juego.EstadoActual == Estado.Jugando)
+                    {
+                        Program.Juego.EstadoActual = Estado.Pausa;
+                    }
+                    else if (Program.Juego.EstadoActual == Estado.Pausa)
+                    {
+                        Program.Juego.EstadoActual = Estado.Jugando;
+                    }
+
+
+                    lblTitulo.Visible = !lblTitulo.Visible;
+                    ControladorSonido.Tocar(Sonido.Unpause, false);
+
+                } else {
+                    Program.Juego.AlPresionarTecla(keyData);
+                }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -77,15 +96,7 @@ namespace SnakeGame.Frms
             if (control == lblJugar)
             {
                 // Jugar
-                this.menu.OcultarOpciones();
-                this.pnlPantalla.Visible = true;
-                this.pnlPantalla.Location = lblJugar.Location;
-
-                this.lblPuntuacion.Text = "0";
-                this.lblPuntuacion.Visible = true;
-                this.lblTrofeo.Visible = true;
-
-//                this.BackColor = Program.Juego.Mundo.Generador.BordeDos;
+                InicializarMenuJuego();
 
                 Program.Juego.EstadoActual = Estado.Preparado;
             } else if (control == lblPerfil)
@@ -104,6 +115,32 @@ namespace SnakeGame.Frms
             {
                 this.Close();
             }
+        }
+
+        public void InicializarMenuJuego()
+        {
+            this.menu.OcultarOpciones();
+            //this.BackColor = Program.Juego.Mundo.Generador.BordeDos;
+            this.pnlPantalla.Visible = true;
+            this.pnlPantalla.Location = lblJugar.Location;
+            this.lblTitulo.Visible = false;
+
+            this.lblPuntuacion.Text = $"0   {Perfil.Instance.Nombre}";
+            this.lblPuntuacion.Visible = true;
+            this.lblTrofeo.Visible = true;
+        }
+
+        public void InicializarMenuPrincipal()
+        {
+            this.menu.MostrarOpciones();
+            this.BackColor = Color.Black;
+            this.pnlPantalla.Visible = false;
+            this.pnlPantalla.Location = new Point(1000, 1000);
+            this.lblTitulo.Visible = true;
+
+            this.lblPuntuacion.Text = "0";
+            this.lblPuntuacion.Visible = false;
+            this.lblTrofeo.Visible = false;
         }
 
         internal void AgregarBox(PictureBox pictureBox)
@@ -157,7 +194,7 @@ namespace SnakeGame.Frms
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.Black;
+            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Font = new System.Drawing.Font("AniMe Matrix - MB_EN", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.lblTitulo.Location = new System.Drawing.Point(196, 28);
@@ -169,28 +206,28 @@ namespace SnakeGame.Frms
             // 
             // lblPuntuacion
             // 
-            this.lblPuntuacion.BackColor = System.Drawing.Color.Black;
-            this.lblPuntuacion.Font = new System.Drawing.Font("Pusab", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPuntuacion.BackColor = System.Drawing.Color.Transparent;
+            this.lblPuntuacion.Font = new System.Drawing.Font("Pusab", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPuntuacion.ForeColor = System.Drawing.SystemColors.Control;
             this.lblPuntuacion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblPuntuacion.Location = new System.Drawing.Point(231, 638);
+            this.lblPuntuacion.Location = new System.Drawing.Point(245, 642);
             this.lblPuntuacion.Name = "lblPuntuacion";
-            this.lblPuntuacion.Size = new System.Drawing.Size(99, 50);
+            this.lblPuntuacion.Size = new System.Drawing.Size(553, 50);
             this.lblPuntuacion.TabIndex = 9;
-            this.lblPuntuacion.Text = "0";
+            this.lblPuntuacion.Tag = "";
             this.lblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblPuntuacion.Visible = false;
             // 
             // lblTrofeo
             // 
-            this.lblTrofeo.BackColor = System.Drawing.Color.Black;
+            this.lblTrofeo.BackColor = System.Drawing.Color.Transparent;
             this.lblTrofeo.Font = new System.Drawing.Font("Pusab", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTrofeo.ForeColor = System.Drawing.SystemColors.Control;
             this.lblTrofeo.Image = ((System.Drawing.Image)(resources.GetObject("lblTrofeo.Image")));
             this.lblTrofeo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTrofeo.Location = new System.Drawing.Point(152, 638);
+            this.lblTrofeo.Location = new System.Drawing.Point(166, 642);
             this.lblTrofeo.Name = "lblTrofeo";
-            this.lblTrofeo.Size = new System.Drawing.Size(73, 50);
+            this.lblTrofeo.Size = new System.Drawing.Size(170, 50);
             this.lblTrofeo.TabIndex = 10;
             this.lblTrofeo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTrofeo.Visible = false;
@@ -261,8 +298,8 @@ namespace SnakeGame.Frms
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(884, 738);
             this.ControlBox = false;
-            this.Controls.Add(this.lblTrofeo);
             this.Controls.Add(this.lblPuntuacion);
+            this.Controls.Add(this.lblTrofeo);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblCabeza);
             this.Controls.Add(this.lblAjustes);
@@ -275,6 +312,7 @@ namespace SnakeGame.Frms
             this.Name = "frmJuego";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Snake Game";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmJuego_FormClosed);
             this.Load += new System.EventHandler(this.frmJuego_Load);
             this.ResumeLayout(false);
 
@@ -282,8 +320,6 @@ namespace SnakeGame.Frms
 
         private void pintarMapa(object sender, PaintEventArgs e)
         {
-
-            // Crear un objeto Graphics a partir del evento Paint
             Graphics g = e.Graphics;
 
             foreach (Casilla casilla in Program.Juego.Mundo.Casillas)
@@ -297,12 +333,18 @@ namespace SnakeGame.Frms
         {
             ControladorSonido.Tocar(Sonido.Music, true);
         }
+
+        private void frmJuego_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.Juego.EstadoActual = Estado.Terminado;
+        }
     }
 
     internal class ControladorFrmJuego
     {
         private frmJuego frm;
         private Dictionary<int, PictureBox> componentes;
+        private bool gameOver;
 
         public ControladorFrmJuego(frmJuego frm)
         {
@@ -310,7 +352,7 @@ namespace SnakeGame.Frms
             this.componentes = new Dictionary<int, PictureBox>();
 
             Program.Juego.AlHacerTick += Tick;
-            Program.Juego.Mundo.EventoAparicionEntidad += AlAparicerEntidad;
+            Program.Juego.Mundo.EventoAparicionEntidad += AlAparecerEntidad;
             Program.Juego.Mundo.EventoEliminacionEntidad += AlEliminarEntidad;
         }
 
@@ -323,9 +365,35 @@ namespace SnakeGame.Frms
                     ActualizarEntidad(entidad);
                 }
             }
+
+            // Esperar a que la serpiente termine y finalizar la partida
+            if (!gameOver && Program.Juego.EstadoActual == Estado.Jugando && !Program.Juego.Jugador.Vivo)
+            {
+                gameOver = true;
+                new Thread(() =>
+                {
+                    Thread.Sleep(1500);
+
+                    // Elimina la serpiente y la fruta de la arena
+                    Program.Juego.AlFinalizar();
+
+                    this.frm.EjecutarEnHiloPrincipal(() =>
+                    {
+                        if (!frm.IsDisposed)
+                        {
+                            frmGameOver frmGameOver = new frmGameOver(frm);
+                            frmGameOver.ShowDialog(this.frm);
+
+                            frm.pnlPantalla.Invalidate(); // Refrescar el panel
+
+                            gameOver = false;
+                        }
+                    });
+                }).Start();
+            }
         }
 
-        private void AlAparicerEntidad(AbsEntidad sender, EventArgs args)
+        private void AlAparecerEntidad(AbsEntidad sender, EventArgs args)
         {
             GenerarComponenteGrafico(sender);
         }
@@ -355,10 +423,6 @@ namespace SnakeGame.Frms
                     PictureBox pictureBox = this.componentes[entidad.Id];
                     pictureBox.Location = new Point(Utils.Escalar(entidad.Posicion.X), Utils.Escalar(entidad.Posicion.Y));
                     pictureBox.Image = r.ObtenerImagen();
-
-                    // Refrecar
-                    pictureBox.Invalidate();
-                    //Console.WriteLine("Componente actualizado: " + pictureBox.Location.X + " | " + entidad.Direccion);
                 });
             }
         }

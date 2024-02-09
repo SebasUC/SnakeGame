@@ -40,7 +40,7 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.Black;
+            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Font = new System.Drawing.Font("AniMe Matrix - MB_EN", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lblTitulo.Location = new System.Drawing.Point(12, -4);
@@ -52,7 +52,7 @@
             // 
             // lblLimites
             // 
-            this.lblLimites.BackColor = System.Drawing.Color.Black;
+            this.lblLimites.BackColor = System.Drawing.Color.Transparent;
             this.lblLimites.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLimites.ForeColor = System.Drawing.SystemColors.Control;
             this.lblLimites.Location = new System.Drawing.Point(5, 74);
@@ -64,7 +64,7 @@
             // 
             // lblMapa
             // 
-            this.lblMapa.BackColor = System.Drawing.Color.Black;
+            this.lblMapa.BackColor = System.Drawing.Color.Transparent;
             this.lblMapa.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMapa.ForeColor = System.Drawing.SystemColors.Control;
             this.lblMapa.Location = new System.Drawing.Point(5, 124);
@@ -76,7 +76,7 @@
             // 
             // lblClasico
             // 
-            this.lblClasico.BackColor = System.Drawing.Color.Black;
+            this.lblClasico.BackColor = System.Drawing.Color.Transparent;
             this.lblClasico.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClasico.ForeColor = System.Drawing.SystemColors.Control;
             this.lblClasico.Image = ((System.Drawing.Image)(resources.GetObject("lblClasico.Image")));
@@ -89,7 +89,7 @@
             // 
             // lblInvernal
             // 
-            this.lblInvernal.BackColor = System.Drawing.Color.Black;
+            this.lblInvernal.BackColor = System.Drawing.Color.Transparent;
             this.lblInvernal.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvernal.ForeColor = System.Drawing.SystemColors.Control;
             this.lblInvernal.Image = ((System.Drawing.Image)(resources.GetObject("lblInvernal.Image")));
@@ -102,7 +102,7 @@
             // 
             // lblDesierto
             // 
-            this.lblDesierto.BackColor = System.Drawing.Color.Black;
+            this.lblDesierto.BackColor = System.Drawing.Color.Transparent;
             this.lblDesierto.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDesierto.ForeColor = System.Drawing.SystemColors.Control;
             this.lblDesierto.Image = ((System.Drawing.Image)(resources.GetObject("lblDesierto.Image")));
@@ -115,7 +115,7 @@
             // 
             // lblRegresar
             // 
-            this.lblRegresar.BackColor = System.Drawing.Color.Black;
+            this.lblRegresar.BackColor = System.Drawing.Color.Transparent;
             this.lblRegresar.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRegresar.ForeColor = System.Drawing.SystemColors.Control;
             this.lblRegresar.Location = new System.Drawing.Point(5, 488);
@@ -130,7 +130,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(863, 609);
+            this.ClientSize = new System.Drawing.Size(863, 561);
             this.ControlBox = false;
             this.Controls.Add(this.lblRegresar);
             this.Controls.Add(this.lblDesierto);

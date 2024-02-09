@@ -71,3 +71,4 @@ F:\Programación\UTN\C#\SnakeGame\bin\Debug\System.Security.Principal.Windows.xm
 F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.csproj.CopyComplete
 F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Frms.frmPerfil.resources
 F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Frms.frmOpciones.resources
+F:\Programación\UTN\C#\SnakeGame\obj\Debug\SnakeGame.Frms.frmGameOver.resources

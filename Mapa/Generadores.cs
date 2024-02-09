@@ -25,7 +25,7 @@ namespace SnakeGame.Mapa
         {
 
             public override Color BordeUno => Color.FromArgb(87, 138, 52);
-            public override Color BordeDos => Color.FromArgb(74, 177, 44);
+            public override Color BordeDos => Color.FromArgb(74, 117, 44);
             public override Color CasillaUno => Color.FromArgb(170, 215, 81);
             public override Color CasillaDos => Color.FromArgb(162, 209, 73);
         }

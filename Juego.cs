@@ -22,15 +22,35 @@ namespace SnakeGame
         public delegate void EventoPuntuacionHandler();
         public event EventoPuntuacionHandler AlPuntuar;
 
+        public delegate void EventoComenzarHandler();
+        public event EventoComenzarHandler AlComenzar;
+
         public Estado EstadoActual;
         public Skins.Skin SkinSeleccionada { get; set; }
-        public Mundo Mundo;
+        public Mundo Mundo { get; set; }
         public bool LimitesActivos { get; set; } = true;
 
         public int TickActual { get; set; }
         public Serpiente Jugador { get; set; }
         public Fruta ComidaActual { get; set; }
-        public int Puntuacion { get; internal set; }
+
+        private int _puntuacion;
+        public int Puntuacion
+        {
+            get
+            {
+                return _puntuacion;
+            }
+            set
+            {
+                _puntuacion = value;
+                // Llamar al evento de puntuación
+                if (AlPuntuar != null)
+                {
+                    AlPuntuar();
+                }
+            }
+        }
 
         public Juego() {
             this.EstadoActual = Estado.Esperando;
@@ -91,11 +111,6 @@ namespace SnakeGame
                     Mundo.EliminarEntidad(fruta);
                     Puntuacion++;
                 });
-
-                if (AlPuntuar != null)
-                {
-                    AlPuntuar();
-                }
             }
         }
 
@@ -127,14 +142,38 @@ namespace SnakeGame
 
         public void ComenzarPartida()
         {
-            Console.WriteLine("Comenzando partida...");
 
             this.Jugador = (Serpiente)Mundo.GenerarEntidad(TipoEntidad.Serpiente, new Coordenada(5, 9), Direccion.Derecha, (j) => { ((Serpiente)j).Skin = SkinSeleccionada; });
             this.AparecerFruta();
 
             this.EstadoActual = Estado.Iniciado;
-            
-            Console.WriteLine("Partida comenzada.");
+
+            if (AlComenzar != null)
+            {
+                AlComenzar();
+            }
+        }
+
+        public void AlFinalizar()
+        {
+            if (Jugador != null)
+            {
+                Mundo.EliminarEntidad(this.Jugador);
+                this.Jugador.Partes.ForEach(cola => Mundo.EliminarEntidad(cola));
+            }
+            if (ComidaActual != null) Mundo.EliminarEntidad(this.ComidaActual);
+
+            if (Puntuacion > Perfil.Instance.PuntuacionMaxima)
+            {
+                Perfil.Instance.PuntuacionMaxima = Puntuacion;
+            }
+            Puntuacion = 0;
+        }
+
+        public void PrepararSiguienteRonda()
+        {
+            this.Mundo.ActualizarColores();
+            ComenzarPartida();
         }
 
         public void AlPresionarTecla(Keys tecla)
@@ -173,17 +212,7 @@ namespace SnakeGame
 
         public bool HaTerminado()
         {
-            return this.EstadoActual == Estado.Terminado;
-        }
-
-        public bool HaComenzado()
-        {
-            return this.EstadoActual == Estado.Comenzado;
-        }
-
-        public void TerminarPartida()
-        {
-            this.EstadoActual = Estado.Terminado;
+            return EstadoActual == Estado.Terminado;
         }
     }
 
@@ -194,8 +223,6 @@ namespace SnakeGame
         Iniciado,
         Jugando,
         Pausa,
-        Terminado,
-
-        Comenzado = Preparado | Jugando | Pausa
+        Terminado
     }
 }

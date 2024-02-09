@@ -42,7 +42,7 @@
             // 
             // lblNombre
             // 
-            this.lblNombre.BackColor = System.Drawing.Color.Black;
+            this.lblNombre.BackColor = System.Drawing.Color.Transparent;
             this.lblNombre.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.ForeColor = System.Drawing.SystemColors.Control;
             this.lblNombre.Location = new System.Drawing.Point(166, 69);
@@ -54,9 +54,9 @@
             // 
             // lblEscribirNick
             // 
-            this.lblEscribirNick.BackColor = System.Drawing.Color.Black;
+            this.lblEscribirNick.BackColor = System.Drawing.Color.Transparent;
             this.lblEscribirNick.Font = new System.Drawing.Font("Pusab", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEscribirNick.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.lblEscribirNick.ForeColor = System.Drawing.Color.LightGray;
             this.lblEscribirNick.Location = new System.Drawing.Point(163, 119);
             this.lblEscribirNick.Name = "lblEscribirNick";
             this.lblEscribirNick.Size = new System.Drawing.Size(500, 27);
@@ -66,7 +66,7 @@
             // 
             // lblApariencia
             // 
-            this.lblApariencia.BackColor = System.Drawing.Color.Black;
+            this.lblApariencia.BackColor = System.Drawing.Color.Transparent;
             this.lblApariencia.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblApariencia.ForeColor = System.Drawing.SystemColors.Control;
             this.lblApariencia.Location = new System.Drawing.Point(163, 201);
@@ -78,10 +78,10 @@
             // 
             // lblCabezaVerde
             // 
-            this.lblCabezaVerde.BackColor = System.Drawing.Color.Black;
+            this.lblCabezaVerde.BackColor = System.Drawing.Color.Transparent;
             this.lblCabezaVerde.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCabezaVerde.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCabezaVerde.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCabezaVerde.ForeColor = System.Drawing.Color.Transparent;
             this.lblCabezaVerde.Image = ((System.Drawing.Image)(resources.GetObject("lblCabezaVerde.Image")));
             this.lblCabezaVerde.Location = new System.Drawing.Point(298, 251);
             this.lblCabezaVerde.Name = "lblCabezaVerde";
@@ -91,9 +91,9 @@
             // 
             // lblPuntuacionMaxima
             // 
-            this.lblPuntuacionMaxima.BackColor = System.Drawing.Color.Black;
+            this.lblPuntuacionMaxima.BackColor = System.Drawing.Color.Transparent;
             this.lblPuntuacionMaxima.Font = new System.Drawing.Font("Pusab", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPuntuacionMaxima.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.lblPuntuacionMaxima.ForeColor = System.Drawing.Color.LightGray;
             this.lblPuntuacionMaxima.Image = ((System.Drawing.Image)(resources.GetObject("lblPuntuacionMaxima.Image")));
             this.lblPuntuacionMaxima.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblPuntuacionMaxima.Location = new System.Drawing.Point(295, 146);
@@ -105,10 +105,10 @@
             // 
             // lblCabezaAzul
             // 
-            this.lblCabezaAzul.BackColor = System.Drawing.Color.Black;
+            this.lblCabezaAzul.BackColor = System.Drawing.Color.Transparent;
             this.lblCabezaAzul.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCabezaAzul.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCabezaAzul.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCabezaAzul.ForeColor = System.Drawing.Color.Transparent;
             this.lblCabezaAzul.Image = ((System.Drawing.Image)(resources.GetObject("lblCabezaAzul.Image")));
             this.lblCabezaAzul.Location = new System.Drawing.Point(239, 251);
             this.lblCabezaAzul.Name = "lblCabezaAzul";
@@ -118,10 +118,10 @@
             // 
             // lblCabezaAmarilla
             // 
-            this.lblCabezaAmarilla.BackColor = System.Drawing.Color.Black;
+            this.lblCabezaAmarilla.BackColor = System.Drawing.Color.Transparent;
             this.lblCabezaAmarilla.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCabezaAmarilla.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCabezaAmarilla.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblCabezaAmarilla.ForeColor = System.Drawing.Color.Transparent;
             this.lblCabezaAmarilla.Image = ((System.Drawing.Image)(resources.GetObject("lblCabezaAmarilla.Image")));
             this.lblCabezaAmarilla.Location = new System.Drawing.Point(354, 251);
             this.lblCabezaAmarilla.Name = "lblCabezaAmarilla";
@@ -131,10 +131,10 @@
             // 
             // lblRegresar
             // 
-            this.lblRegresar.BackColor = System.Drawing.Color.Black;
+            this.lblRegresar.BackColor = System.Drawing.Color.Transparent;
             this.lblRegresar.Font = new System.Drawing.Font("Pusab", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRegresar.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblRegresar.Location = new System.Drawing.Point(163, 348);
+            this.lblRegresar.Location = new System.Drawing.Point(163, 422);
             this.lblRegresar.Name = "lblRegresar";
             this.lblRegresar.Size = new System.Drawing.Size(500, 50);
             this.lblRegresar.TabIndex = 16;
@@ -143,9 +143,9 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.BackColor = System.Drawing.Color.Black;
+            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Font = new System.Drawing.Font("AniMe Matrix - MB_EN", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblTitulo.ForeColor = System.Drawing.Color.Silver;
             this.lblTitulo.Location = new System.Drawing.Point(156, -9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(507, 78);
@@ -158,7 +158,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 557);
             this.ControlBox = false;
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblRegresar);

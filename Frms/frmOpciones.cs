@@ -19,6 +19,12 @@ namespace SnakeGame.Frms
         {
             InitializeComponent();
 
+            // Si la partida está en progreso, utilizar el fondo del mapa
+            if (Program.Juego.EstadoActual == Estado.Jugando || Program.Juego.EstadoActual == Estado.Pausa)
+            {
+                this.BackColor = Program.Juego.Mundo.Generador.BordeDos;
+            }
+
             this.menu = new MenuOpciones()
             {
                 frm = this,
@@ -58,14 +64,14 @@ namespace SnakeGame.Frms
 
         private void Hover(Control nuevoControl, Control antiguoControl)
         {
-            if (antiguoControl != null && antiguoControl.ForeColor != Color.Gold)
+            if (antiguoControl != null && antiguoControl.ForeColor != Color.Black)
             {
                 antiguoControl.ForeColor = Color.White;
             }
 
-            if (nuevoControl.ForeColor != Color.Gold)
+            if (nuevoControl.ForeColor != Color.Black)
             {
-                nuevoControl.ForeColor = Color.Green;
+                nuevoControl.ForeColor = Color.Silver;
             }
         }
 
@@ -111,7 +117,7 @@ namespace SnakeGame.Frms
                 mapaSeleccionado = lblInvernal;
             }
 
-            mapaSeleccionado.ForeColor = Color.Gold;
+            mapaSeleccionado.ForeColor = Color.Black;
 
             lblLimites.Text = $"Límites del mapa ({(Program.Juego.LimitesActivos ? "Activado" : "Desactivado")})";
 

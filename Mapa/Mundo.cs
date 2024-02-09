@@ -17,9 +17,11 @@ namespace SnakeGame.Mapa
 
         public delegate void AparicionEntidadHandler(AbsEntidad sender, EventArgs args);
         public delegate void EliminacionEntidadHandler(AbsEntidad sender, EventArgs args);
-        
+        public delegate void SerpienteMuertaHandler(Serpiente sender);
+
         public event AparicionEntidadHandler EventoAparicionEntidad;
         public event EliminacionEntidadHandler EventoEliminacionEntidad;
+        public event SerpienteMuertaHandler EventoSerpienteMuerta;
 
         private Generador _generador;
         public Generador Generador { 
@@ -145,7 +147,7 @@ namespace SnakeGame.Mapa
             });
         }
 
-        private void ActualizarColores()
+        public void ActualizarColores()
         {
             bool bandera = false;
 

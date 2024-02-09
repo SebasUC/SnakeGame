@@ -12,9 +12,15 @@ namespace SnakeGame.Frms
 
         public override void Actualizar()
         {
-            this.Puntero.Location = new Point(this.Controles[OpcionSeleccionada].Location.X + 100, this.Controles[OpcionSeleccionada].Location.Y);
+            this.Puntero.Location = new Point(this.Controles[OpcionSeleccionada].Location.X + 50, this.Controles[OpcionSeleccionada].Location.Y);
             this.Puntero.Image = Program.Juego.SkinSeleccionada.TexturasCabeza[Posicion.Direccion.Abajo];
             base.Actualizar();
+        }
+
+        public override void MostrarOpciones()
+        {
+            this.Puntero.Visible = true;
+            base.MostrarOpciones();
         }
 
         public override void OcultarOpciones()

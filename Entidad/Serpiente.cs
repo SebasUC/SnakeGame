@@ -15,7 +15,7 @@ namespace SnakeGame.Entidad
     {
         public override string Nombre => "Serpiente";
         public Skin Skin { get; set; }
-        private List<Cola> partes = new List<Cola>();
+        public List<Cola> Partes { get; set; } = new List<Cola>();
 
         public Serpiente(Mundo mundo)
         {
@@ -27,21 +27,13 @@ namespace SnakeGame.Entidad
         {
             if (this.Vivo)
             {
-                // Algoritmo que lentamente mueve cada parte hacia esa dirección
-                Coordenada ultimaPosicion = this.Posicion;
-                foreach (Cola cola in partes)
-                {
-                    Coordenada actual = cola.Posicion;
-                    cola.MoverCola(ultimaPosicion);
-                    ultimaPosicion = actual;
-                }
-
-                // Ahora se puede mover la cabeza
+                // Validar si la serpiente morirá
                 if (this.ValidarColisiones())
                 {
                     Coordenada siguiente = this.Posicion.MoverHacia(Direccion);
 
-                    if (!Program.Juego.LimitesActivos) {
+                    if (!Program.Juego.LimitesActivos)
+                    {
                         // Si se permite salirse del mapa y la siguiente casilla se saldrá
 
                         if (siguiente.Y >= (Mundo.TamañoY - 1))
@@ -70,6 +62,17 @@ namespace SnakeGame.Entidad
 
 
                     }
+                    
+                    // Algoritmo que lentamente mueve cada parte hacia esa dirección
+                    Coordenada ultimaPosicion = this.Posicion;
+                    foreach (Cola cola in Partes)
+                    {
+                        Coordenada actual = cola.Posicion;
+                        cola.MoverCola(ultimaPosicion);
+                        ultimaPosicion = actual;
+                    }
+                    
+                    // Mover a la siguiente casilla
                     this.Posicion = siguiente;
 
                     NecesitaActualizar = true;
@@ -99,7 +102,7 @@ namespace SnakeGame.Entidad
         public void MirarHacia(Direccion direccion)
         {
             this.Direccion = direccion;
-            foreach (Cola cola in partes)
+            foreach (Cola cola in Partes)
             {
                 cola.Direccion = this.Direccion;
             }
@@ -110,7 +113,7 @@ namespace SnakeGame.Entidad
         public override void Morir()
         {
             base.Morir();
-            foreach (Cola cola in partes)
+            foreach (Cola cola in Partes)
             {
                 cola.Morir();
             }
@@ -126,11 +129,11 @@ namespace SnakeGame.Entidad
 
         public void Crecer()
         {
-            Direccion contrariaALaUltimaCola = Direcciones.OpuestaDe(this.partes[this.partes.Count - 1].Direccion);
+            Direccion contrariaALaUltimaCola = Direcciones.OpuestaDe(this.Partes[this.Partes.Count - 1].Direccion);
             Coordenada detras = this.Posicion.MoverHacia(contrariaALaUltimaCola); // Detrás
 
             Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, detras, this.Direccion, (j) => { ((Cola)j).Skin = this.Skin; });
-            this.partes.Add(cola);
+            this.Partes.Add(cola);
         }
 
         private void PostGeneracion(AbsEntidad sender, EventArgs args)
@@ -152,7 +155,7 @@ namespace SnakeGame.Entidad
                     // Generar la cola de la serpiente
                     Cola cola = (Cola)this.Mundo.GenerarEntidad(TipoEntidad.Cola, nuevaPos, this.Direccion, (j) => { ((Cola)j).Skin = this.Skin; });
 
-                    this.partes.Add(cola);
+                    this.Partes.Add(cola);
                 }
             }
         }

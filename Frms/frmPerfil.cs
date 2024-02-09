@@ -19,6 +19,12 @@ namespace SnakeGame.Frms
         {
             InitializeComponent();
 
+            // Si la partida está en progreso, utilizar el fondo del mapa
+            if (Program.Juego.EstadoActual == Estado.Jugando || Program.Juego.EstadoActual == Estado.Pausa)
+            {
+                this.BackColor = Program.Juego.Mundo.Generador.BordeDos;
+            }
+
             this.menu = new MenuPerfil()
             {
                 frm = this,
@@ -98,7 +104,7 @@ namespace SnakeGame.Frms
                     // Confirmar
                     Perfil.Instance.Nombre = lblTextoNombre.Text;
                     // Restablecer color
-                    lblTextoNombre.ForeColor = Color.FromArgb(128, 128, 255);
+                    lblTextoNombre.ForeColor = Color.Silver;
                     
                     this.EscuchandoNombre = false;
                     ControladorSonido.Tocar(Sonido.Food, false);
@@ -146,11 +152,11 @@ namespace SnakeGame.Frms
             // Establecer un color para indicar que es la opción actual
             if (EsIcono(nuevoControl) && nuevoControl != actualIconoSeleccionado)
             {
-                nuevoControl.BackColor = Color.Green;
+                nuevoControl.BackColor = Color.Silver;
             }
             else
             {
-                nuevoControl.ForeColor = Color.Green;
+                nuevoControl.ForeColor = Color.Silver;
             }
 
             ControladorSonido.Tocar(Sonido.Move, false);

@@ -17,7 +17,7 @@ namespace SnakeGame.Frms
             internal set
             {
                 this._controles = value;
-                this.ConfigurarControles();
+                //this.ConfigurarControles();
             }
         }
         public int OpcionSeleccionada { get; internal set; }
@@ -90,6 +90,11 @@ namespace SnakeGame.Frms
             {
                 AlHacerClick(this.Controles[this.OpcionSeleccionada], OpcionSeleccionada);
             }
+        }
+
+        public virtual void MostrarOpciones()
+        {
+            this.Controles.ForEach(opcion => { opcion.Visible = true; });
         }
 
         public virtual void OcultarOpciones()
